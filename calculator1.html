@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+	body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+  }
+.mainContainer
+{
+    display: flex;
+    flex-direction: column;
+    border: solid black 2px;
+    justify-content: center;
+    width: auto;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px;
+    background-color: rgb(184, 248, 192);
+}
+.display
+{
+    padding-top: 18px;
+    padding-right: 5px;
+    float: right;
+    width: 312px;
+    height: 40px;
+    border: solid black 2px;
+    align-self: center;
+    text-align: right;
+    vertical-align: middle;
+    margin-top: 20px;
+    background-color: white;
+}
+.displaytext
+{
+    font-size: 20px;
+    font-weight: 500;
+}
+button
+{
+    width: 70px;
+    height: 50px;
+    font-size: 25px;
+    background-color: rgb(250, 127, 127);
+    border: none;
+    box-shadow: 2px 2px 3px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover
+{
+    background-color: rgb(243, 217, 72);
+}
+button:active
+{
+    background-color: burlywood;
+}
+.calculatebrand
+{
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 0;
+    margin-left: 5px;
+    font-weight: bold;
+    margin-top: 7px;
+    
+}
+.functionalButton
+{
+    display: flex;
+    flex-direction: row;
+    
+}
+.fb
+{
+    width: 100px;
+    background-color: rgb(112, 112, 251);
+}
+.fb1
+{
+    margin-bottom: 20px;
+    width: 100px;
+    background-color: rgb(112, 251, 249);
+}
+
+    </style>
+
+
+</head>
+<body>
+    <div class="mainContainer">
+        <p class="calculatebrand">
+            RJ's Calculator
+        </p>
+            <div class="display">
+                <div  id="displayid" class="displaytext"></div>
+            </div>
+           
+            <p>
+                <button onclick="handleClick('7')">7</button>
+                <button onclick="handleClick('8')">8</button>
+                <button onclick="handleClick('9')">9</button>
+                <button onclick="handleClickOperator('/')">/</button>
+                
+            </p>
+            <p>
+                <button onclick="handleClick('4')">4</button>
+                <button onclick="handleClick('5')">5</button>
+                <button onclick="handleClick('6')">6</button>
+                <button onclick="handleClickOperator('*')">*</button>
+            </p>
+            <p>
+                <button onclick="handleClick('3')">3</button>
+                <button onclick="handleClick('2')">2</button>
+                <button onclick="handleClick('1')">1</button>
+                <button onclick="handleClickOperator('+')">+</button>
+            </p>
+            <p>
+                <button onclick="handleClick('0')">0</button>
+                <button onclick="handleClick('.')">.</button>
+                <button onclick="handleClick('00')">00</button>
+                <button onclick="handleClickOperator('-')">-</button>
+            </p>
+            <div class="functionalButton">
+                <button onclick="findFactorial()" class="fb1">!</button>
+                <button onclick="findSquareRoot()" class="fb1">&radic;</button>
+                <button onclick="findCubeRoot()" class="fb1" id="equal">&#8731;</button>
+            </div>
+            <div class="functionalButton">
+                <button onclick="backspace()" class="fb">&larr;</button>
+                <button onclick="clearall()" class="fb">CE</button>
+                <button onclick="calculate()" class="fb" id="equal">=</button>
+            </div>
+
+    </div>
+    <script>
+        let calculation='';
+        let lastoperator=null;
+        function handleClickOperator(value)
+        {
+            if(calculation=="")
+            {
+        
+            }
+            else if(calculation[calculation.length-1]==value)
+            {
+                
+            }
+            else
+            {
+                calculation+=value;
+                displaynumber();
+            }
+            lastoperator=value;
+        }
+        function handleClick(value)
+        {
+            calculation+=value;
+            displaynumber(); 
+        }
+        function clearall()
+        {
+            calculation='';
+            displaynumber(); 
+        }
+        function calculate()
+        {
+            if(calculation=="")
+            {
+                
+            }
+            else
+            {
+                calculation=eval(calculation.slice(0, 22));
+                document.getElementById("displayid").innerHTML=`= ${calculation}`;  
+            }
+            
+        }
+        function backspace()
+        {
+            calculation=calculation.slice(0, calculation.length-1);
+            displaynumber();
+        }
+        function displaynumber()
+        {
+            document.getElementById("displayid").innerHTML=calculation.slice(0, 22);
+        }
+        function findFactorial()
+        {
+            let valueFac =1;
+            for(let i=1; i <= calculation; i++)
+            {
+                valueFac*=i;
+            }
+            document.getElementById("displayid").innerHTML=`= ${valueFac}`;
+        }
+        function findSquareRoot()
+        {
+            let resultsq = Math.sqrt(calculation);
+            calculation = resultsq;
+            document.getElementById("displayid").innerHTML=`= ${calculation}`;
+        }
+        function findCubeRoot()
+        {
+            let result1 = Math.cbrt(calculation);
+            calculation = result1;
+            document.getElementById("displayid").innerHTML=`= ${calculation}`;
+        }
+        
+    </script>
+</body>
+</html>
